@@ -1,0 +1,4 @@
+---
+# defaults file for base
+
+public_keys_path: public_keys/* 

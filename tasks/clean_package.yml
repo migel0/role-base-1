@@ -1,0 +1,17 @@
+- name: Remove unnecessary packages
+  apt:
+    name: "{{item}}"
+    purge: yes
+    state: absent
+  with_items:
+    - lvm2
+    - open-iscsi
+    - mdadm 
+    - snapd 
+    - snap-confine 
+    - liblxc1 
+    - lxc-common 
+    - lxcfs 
+    - lxd 
+    - lxd-client  
+    - ubuntu-core-launcher

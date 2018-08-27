@@ -1,0 +1,5 @@
+- name: Ensure a locale exists
+  locale_gen:
+    name: es_ES.UTF-8
+    state: present
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'

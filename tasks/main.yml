@@ -1,0 +1,24 @@
+---
+# tasks file for base
+
+# register_vars [TODO]
+
+- include: upgrade_distro.yml
+
+- include: swap.yml
+
+- include: timezone.yml
+
+- include: locales.yml
+
+- include: authorized_keys.yml
+  tags: ['ssh']
+
+- include: git.yml
+
+- include: clean_package.yml
+  when: ( ansible_os_family|lower == 'debian' )
+
+- include: reboot_if_needed.yml
+
+

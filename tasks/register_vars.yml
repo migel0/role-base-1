@@ -1,0 +1,4 @@
+- name: Register is_azure variable
+  command: fgrep -i azure /var/log/waagent.log
+  register: is_azure
+  ignore_errors: True

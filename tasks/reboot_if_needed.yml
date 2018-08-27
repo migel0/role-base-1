@@ -1,0 +1,38 @@
+- name: Reboot machine (Ubuntu/Debian) - Step 1
+  shell: "[ -f /var/run/reboot-required ]"
+  failed_when: False
+  register: reboot_required_debian
+  when: ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
+
+- name: Reboot machine (Red Hat /CentOS) - Step 1
+  command: needs-restarting -r
+  register: reboot_required_centos
+  ignore_errors: True
+  #changed_when: False
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Amazon'      
+
+  #- debug:
+  #    var: reboot_required_centos
+  #
+  #- debug:
+  #    var: reboot_required_debian
+
+- name: Reboot machine - Step 2
+  shell: sleep 5 && reboot
+  async: 30
+  poll: 0 
+  ignore_errors: true
+  register: reboot_machine
+  when: (reboot_required_debian.changed != false and reboot_required_debian.rc == 0) or 
+    (reboot_required_centos.changed != false  and reboot_required_centos.rc == 1)
+
+
+
+- name: waiting for server to come back after reboot
+  become: no
+  local_action: 
+    wait_for host={{ inventory_hostname }} 
+    state=started port=22 delay=30 
+    timeout=300 connect_timeout=15
+  when: reboot_machine.changed != false
+

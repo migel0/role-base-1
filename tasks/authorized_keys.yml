@@ -1,0 +1,8 @@
+- name: Set authorized key to sudo user
+  authorized_key:
+    user: "{{ansible_user}}"
+    key: "{{ lookup('file', item) }}"
+    state: present
+  with_fileglob:
+    - "{{ public_keys_path }}/*"
+
