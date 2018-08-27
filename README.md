@@ -6,7 +6,25 @@ Preparación de una máquina de 4eixos
 Requirements
 ------------
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+Para emplear este role en tu playbook:
+
+* Crear un requirements.txt
+* Introducir la siguiente línea:
+
+```yaml
+
+- src: git+https://github.com/4eixos/playbook-base.git
+  version: master
+
+```
+
+y ejecuta:
+
+```sh
+
+ansible-galaxy install -r requirements.yml -p roles/
+
+```
 
 Role Variables
 --------------
