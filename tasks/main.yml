@@ -3,6 +3,11 @@
 
 # register_vars [TODO]
 
+- include: register_vars.yml
+
+- include: clean_package.yml
+  when: ( ansible_os_family|lower == 'debian' )
+
 - include: upgrade_distro.yml
 
 - include: swap.yml
@@ -16,8 +21,6 @@
 
 - include: git.yml
 
-- include: clean_package.yml
-  when: ( ansible_os_family|lower == 'debian' )
 
 - include: reboot_if_needed.yml
 
