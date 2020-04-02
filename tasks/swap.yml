@@ -4,8 +4,8 @@
 
 - block:
   - name: create swap file
-    #command: dd if=/dev/zero of=/swapfile bs=1G count=4
-    command: fallocate -l {{ (ansible_memtotal_mb|int|abs)}}M /swapfile
+    #command: fallocate -l {{ (ansible_memtotal_mb|int|abs)}}M /swapfile
+    command: fallocate -l 2G /swapfile
 
   - name: change permission type
     file: path=/swapfile mode=600 state=file
