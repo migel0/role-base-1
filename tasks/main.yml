@@ -18,6 +18,7 @@
 
 - include: authorized_keys.yml
   tags: ['ssh']
+- include: sshlog.yml
 
 - include: git.yml
 
