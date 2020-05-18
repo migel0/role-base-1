@@ -19,7 +19,7 @@
 - include: authorized_keys.yml
   tags: ['ssh']
 - include: sshlog.yml
-  when: sshlog|bool == 1
+  when: sshlog_enable | bool
 - include: git.yml
 
 - include: reboot_if_needed.yml
