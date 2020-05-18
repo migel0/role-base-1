@@ -19,9 +19,8 @@
 - include: authorized_keys.yml
   tags: ['ssh']
 - include: sshlog.yml
-  tags: [ 'never', 'sshlog' ]
+  tags: [ never, sshlog ]
 - include: git.yml
-
 
 - include: reboot_if_needed.yml
 
