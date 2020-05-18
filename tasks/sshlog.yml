@@ -1,0 +1,21 @@
+- name: create folder
+  file:
+    path: /var/log/sshlog
+    state: directory
+    owner: root
+    group: "{{ansible_user}}"
+    mode: '0775'
+- name: add rule
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '^PermitUserEnvironment'
+    line: 'PermitUserEnvironment yes'
+  notify:
+    - restart sshd
+- name: copy file
+  copy:
+    src: sshlog.sh
+    dest: /etc/profile.d/sshlog.sh
+    owner: root
+    group: root
+    mode: 0644
