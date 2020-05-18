@@ -19,7 +19,7 @@
 - include: authorized_keys.yml
   tags: ['ssh']
 - include: sshlog.yml
-  when: sshlog|bool == True 
+  tags: [ 'never', 'sshlog' ]
 - include: git.yml
 
 
