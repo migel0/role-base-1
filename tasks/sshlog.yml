@@ -14,7 +14,7 @@
     - restart sshd
 - name: copy file
   copy:
-    src: ./sshlog.sh
+    src: sshlog.sh
     dest: /etc/profile.d/sshlog.sh
     owner: root
     group: root
