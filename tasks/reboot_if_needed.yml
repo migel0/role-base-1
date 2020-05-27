@@ -17,22 +17,9 @@
   #- debug:
   #    var: reboot_required_debian
 
-- name: Reboot machine - Step 2
-  shell: sleep 5 && reboot
-  async: 30
-  poll: 0 
-  ignore_errors: true
-  register: reboot_machine
+- name: Reboot machine, Step 2
+  reboot:
+    reboot_timeout: 300
   when: (reboot_required_debian.changed != false and reboot_required_debian.rc == 0) or 
     (reboot_required_centos.changed != false  and reboot_required_centos.rc == 1)
-
-
-
-- name: waiting for server to come back after reboot
-  become: no
-  local_action: 
-    wait_for host={{ inventory_hostname }} 
-    state=started port=22 delay=30 
-    timeout=300 connect_timeout=15
-  when: reboot_machine.changed != false
 
